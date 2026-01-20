@@ -13,7 +13,7 @@ const page = () => {
 
   const handleDelete = (index) => {
     let copyTask = [...Task];
-    copyTask.splice(index,1);
+    copyTask.splice(index, 1);
     setTask(copyTask);
   }
 
@@ -28,7 +28,7 @@ const page = () => {
     <>
 
       <div className="flex justify-center mt-1">
-        <div className="flex flex-col w-screen items-center">
+        <div className="flex flex-col w-full items-center">
           <h1 className="text-4xl m-4">ToDo List</h1>
           <div className="mt-6 w-full flex justify-center">
             <form className="w-2/3 flex flex-col text-left" onSubmit={handleSubmit}>
@@ -41,13 +41,17 @@ const page = () => {
                 id='title'
                 type="text"
                 placeholder="Enter title here"
-                className="bg-zinc-400
-                border-gray-700
-                border-4 
+                className="
+                bg-zinc-800
+                border
+                border-zinc-600
+                text-white
+                placeholder-zinc-400
+                focus:border-indigo-500
+                focus:outline-none 
                 px-4 
                 py-2 
-                mb-4
-                text-white"
+                mb-4"
                 value={Title}
                 onChange={(e) => {
                   setTitle(e.target.value)
@@ -62,13 +66,17 @@ const page = () => {
                 id='description'
                 type="text"
                 placeholder="Enter description here"
-                className="bg-zinc-400 
-              border-gray-700 
-                border-4 
+                className="
+                bg-zinc-800 
+                border          
+                border-zinc-600
+                text-white
+                placeholder-zinc-400
+                focus:border-indigo-500
+                focus:outline-none
                 px-4 
                 py-2 
-                mb-4
-                text-white"
+                mb-4"
                 value={Des}
                 onChange={(e) => {
                   setDes(e.target.value)
@@ -76,7 +84,10 @@ const page = () => {
               />
 
               <button
-                className="bg-gray-500
+                className="
+                bg-indigo-600
+                hover:bg-indigo-700
+                text-white
                  px-6 
                  py-2
                  rounded-4xl
@@ -90,12 +101,12 @@ const page = () => {
             </form>
           </div>
 
-          <hr className='w-screen mb-1' />
-          <hr className='w-screen' />
+          <hr className='w-full mb-1 border-zinc-700' />
+          <hr className='w-full border-zinc-700' />
 
         </div>
       </div>
-      <div className=' py-4 w-screen flex justify-around'>
+      <div className='py-4 w-full flex flex-col items-center gap-4'>
         {Task.map((t, i) => {
           return <Tasks task={t} onDelete={handleDelete} index={i} key={i} />
         })}
