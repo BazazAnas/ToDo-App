@@ -1,14 +1,21 @@
 import React from 'react'
 
-const Tasks = (props) => {
+const Tasks = ({ task, onDelete, index }) => {
     return (
         <>
             <div>
-                {console.log(props.task.Title)}
-                {console.log(props.task.Des)}
-                <h4>{props.task.Title}</h4>
-                <h5>{props.task.Des}</h5>
-                <hr className='w-screen mb-1' />
+                <h4>{task.Title}</h4>
+                <h5>{task.Des}</h5>
+                <button
+                    className='
+                bg-red-500
+                rounded-2xl
+                px-2
+                py-4'
+                    onClick={() => onDelete(index)}
+                >
+                    Delete</button>
+                <hr className='w-screen mb-1 mt-4' />
                 <hr className='w-screen' />
             </div>
         </>

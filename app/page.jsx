@@ -11,7 +11,11 @@ const page = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [Task, setTask] = useState([]);
 
-
+  const handleDelete = (index) => {
+    let copyTask = [...Task];
+    copyTask.splice(index,1);
+    setTask(copyTask);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -91,11 +95,12 @@ const page = () => {
 
         </div>
       </div>
-       <div>
-            {Task.map((t,i) => {
-              return <Tasks task={t} key={i} />             
-            })}
-          </div>
+      <div className=' py-4 w-screen flex justify-around'>
+        {Task.map((t, i) => {
+          return <Tasks task={t} onDelete={handleDelete} index={i} key={i} />
+        })}
+      </div>
+
     </>
   )
 }
