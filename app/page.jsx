@@ -1,13 +1,33 @@
-import React from 'react'
+"use client"
+import Tasks from '@/components/Tasks';
+import React, { useState } from 'react'
 
 const page = () => {
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [Title, setTitle] = useState("");
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [Des, setDes] = useState("");
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [Task, setTask] = useState([]);
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setTask([...Task, { Title, Des }])
+    setTitle("");
+    setDes("");
+  }
+
   return (
     <>
+
       <div className="flex justify-center mt-1">
         <div className="flex flex-col w-screen items-center">
           <h1 className="text-4xl m-4">ToDo List</h1>
           <div className="mt-6 w-full flex justify-center">
-            <form className="w-2/3 flex flex-col text-left">
+            <form className="w-2/3 flex flex-col text-left" onSubmit={handleSubmit}>
 
               <label htmlFor="title" className="mb-2">
                 Enter title for the task
@@ -16,14 +36,18 @@ const page = () => {
                 name="title"
                 id='title'
                 type="text"
-                placeholder="Enter Title"
+                placeholder="Enter title here"
                 className="bg-zinc-400
                 border-gray-700
                 border-4 
                 px-4 
                 py-2 
                 mb-4
-                text-white" 
+                text-white"
+                value={Title}
+                onChange={(e) => {
+                  setTitle(e.target.value)
+                }}
               />
 
               <label htmlFor="description" className="mb-2">
@@ -33,7 +57,7 @@ const page = () => {
                 name="description"
                 id='description'
                 type="text"
-                placeholder="Enter Description"
+                placeholder="Enter description here"
                 className="bg-zinc-400 
               border-gray-700 
                 border-4 
@@ -41,10 +65,13 @@ const page = () => {
                 py-2 
                 mb-4
                 text-white"
+                value={Des}
+                onChange={(e) => {
+                  setDes(e.target.value)
+                }}
               />
 
               <button
-                type="button"
                 className="bg-gray-500
                  px-6 
                  py-2
@@ -56,12 +83,19 @@ const page = () => {
               >
                 ADD
               </button>
-
             </form>
           </div>
+
+          <hr className='w-screen mb-1' />
+          <hr className='w-screen' />
+
         </div>
       </div>
-
+       <div>
+            {Task.map((t,i) => {
+              return <Tasks task={t} key={i} />             
+            })}
+          </div>
     </>
   )
 }
